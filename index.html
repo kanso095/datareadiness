@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neural Cognition | Advanced Research</title>
+    <title>AI Data Readiness for SMEs | ENGGEN 736 Research</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         :root {
             --primary: #8b5cf6;
@@ -70,6 +71,11 @@
 
         h3 {
             font-size: 2rem;
+            color: var(--light);
+        }
+
+        h4 {
+            font-size: 1.4rem;
             color: var(--light);
         }
 
@@ -364,13 +370,12 @@
             }
         }
 
-        .neural-network {
+        .particle-network {
             position: absolute;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
-            opacity: 0.1;
+            width: 100%;
+            height: 100%;
             z-index: 0;
         }
 
@@ -465,14 +470,14 @@
             font-size: 1.1rem;
         }
 
-        /* Authors Section */
-        .authors {
+        /* Problem Section */
+        .problem {
             background: linear-gradient(135deg, var(--darker), var(--dark));
             position: relative;
             overflow: hidden;
         }
 
-        .authors:before {
+        .problem:before {
             content: '';
             position: absolute;
             top: 0;
@@ -483,115 +488,18 @@
             opacity: 0.1;
         }
 
-        .authors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .author-card {
-            background: var(--glass);
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .author-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-        }
-
-        .author-card:hover {
-            transform: translateY(-15px) rotate(2deg);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-light);
-        }
-
-        .author-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            margin: 0 auto 25px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.4);
-        }
-
-        .author-img:after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: scale(0);
-            transition: var(--transition);
-        }
-
-        .author-card:hover .author-img:after {
-            transform: scale(1);
-        }
-
-        .author-name {
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-            color: var(--light);
-        }
-
-        .author-role {
-            color: var(--primary-light);
-            margin-bottom: 20px;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        /* Methodology Section */
-        .methodology {
-            background-color: var(--dark);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .methodology:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, var(--accent) 0%, transparent 50%);
-            opacity: 0.1;
-        }
-
-        .methodology-content {
+        .problem-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             align-items: center;
         }
 
-        .methodology-text {
+        .problem-text {
             padding-right: 20px;
         }
 
-        .methodology-visual {
+        .problem-visual {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 25px;
             padding: 50px;
@@ -604,7 +512,7 @@
             overflow: hidden;
         }
 
-        .methodology-visual:before {
+        .problem-visual:before {
             content: '';
             position: absolute;
             width: 200%;
@@ -642,32 +550,32 @@
             font-size: 2.2rem;
         }
 
-        /* Results Section */
-        .results {
-            background: linear-gradient(135deg, var(--darker), var(--dark));
+        /* Benefits Section */
+        .benefits {
+            background-color: var(--dark);
             position: relative;
             overflow: hidden;
         }
 
-        .results:before {
+        .benefits:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 80% 40%, var(--primary-light) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 80%, var(--accent) 0%, transparent 50%);
             opacity: 0.1;
         }
 
-        .results-content {
+        .benefits-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             align-items: center;
         }
 
-        .results-chart {
+        .benefits-chart {
             background: var(--glass);
             border-radius: 25px;
             padding: 50px;
@@ -701,43 +609,206 @@
             font-size: 2.2rem;
         }
 
-        .results-text {
+        .benefits-text {
             padding-left: 20px;
         }
 
-        .feature-list {
-            list-style: none;
-            margin-top: 40px;
-        }
-
-        .feature-list li {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 15px 20px;
-            background: var(--glass);
+        .benefits-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
             border-radius: 15px;
-            border: 1px solid var(--glass-border);
-            transition: var(--transition);
+            overflow: hidden;
+            box-shadow: var(--shadow);
         }
 
-        .feature-list li:hover {
-            transform: translateX(10px);
+        .benefits-table th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .benefits-table td {
+            padding: 20px;
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--gray-light);
+        }
+
+        .benefits-table tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .benefits-table tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Changes Section */
+        .changes {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .changes:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 40%, var(--primary-light) 0%, transparent 50%);
+            opacity: 0.1;
+        }
+
+        .changes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .change-card {
+            background: var(--glass);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .change-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .change-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: var(--shadow-lg);
             border-color: var(--primary-light);
         }
 
-        .feature-list i {
-            width: 40px;
-            height: 40px;
+        .change-icon {
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: var(--secondary);
-            color: white;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .change-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+
+        .change-state {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .change-state.current {
+            border-left-color: var(--accent);
+        }
+
+        .change-state.future {
+            border-left-color: var(--secondary);
+        }
+
+        .change-state h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--gray-light);
+        }
+
+        /* Author Section */
+        .author {
+            background-color: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .author:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, var(--secondary) 0%, transparent 50%);
+            opacity: 0.1;
+        }
+
+        .author-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .author-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 35px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .author-img:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: var(--transition);
+        }
+
+        .author-content:hover .author-img:after {
+            transform: scale(1);
+        }
+
+        .author-name {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .author-id {
+            color: var(--primary-light);
+            margin-bottom: 25px;
+            font-weight: 600;
             font-size: 1.2rem;
-            flex-shrink: 0;
         }
 
         /* Citation Section */
@@ -884,16 +955,6 @@
             z-index: 1;
         }
 
-        /* Particle Network */
-        .particle-network {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
         /* Responsive Styles */
         @media (max-width: 1200px) {
             h1 {
@@ -910,14 +971,14 @@
         }
 
         @media (max-width: 992px) {
-            .methodology-content,
-            .results-content {
+            .problem-content,
+            .benefits-content {
                 grid-template-columns: 1fr;
                 gap: 60px;
             }
             
-            .methodology-text,
-            .results-text {
+            .problem-text,
+            .benefits-text {
                 padding: 0;
             }
             
@@ -925,8 +986,8 @@
                 font-size: 3.5rem;
             }
             
-            .methodology-visual,
-            .results-chart {
+            .problem-visual,
+            .benefits-chart {
                 height: 400px;
             }
         }
@@ -994,6 +1055,11 @@
             .citation-box {
                 padding: 40px;
             }
+            
+            .benefits-table {
+                display: block;
+                overflow-x: auto;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1013,8 +1079,8 @@
                 font-size: 2.5rem;
             }
             
-            .methodology-visual,
-            .results-chart {
+            .problem-visual,
+            .benefits-chart {
                 padding: 30px;
                 height: 300px;
             }
@@ -1033,17 +1099,17 @@
             <nav class="navbar">
                 <a href="#" class="logo">
                     <i class="fas fa-brain-circuit"></i>
-                    NeuralCognition
+                    AI Readiness Research
                 </a>
                 <div class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
                 </div>
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#abstract">Abstract</a></li>
-                    <li><a href="#authors">Team</a></li>
-                    <li><a href="#methodology">Methodology</a></li>
-                    <li><a href="#results">Results</a></li>
-                    <li><a href="#citation">Citation</a></li>
+                    <li><a href="#problem">Problem</a></li>
+                    <li><a href="#benefits">Methodology</a></li>
+                    <li><a href="#changes">Results</a></li>
+                    <li><a href="#author">Author</a></li>
                 </ul>
             </nav>
         </div>
@@ -1060,16 +1126,16 @@
         <div class="particle-network" id="particleNetwork"></div>
         <div class="container">
             <div class="hero-content">
-                <h1 id="hero-title">Advanced Neural Networks for Complex Pattern Recognition</h1>
-                <p id="hero-subtitle">A groundbreaking study on the application of deep learning architectures in multi-modal data analysis with significant improvements in accuracy and efficiency.</p>
+                <h1 id="hero-title">AI Data Readiness for SMEs</h1>
+                <p id="hero-subtitle">A business goal-oriented approach to preparing small and medium enterprises for AI adoption through strategic data readiness assessment.</p>
                 <div class="hero-btns">
                     <a href="#abstract" class="btn">
                         <i class="fas fa-scroll"></i>
                         Read Abstract
                     </a>
-                    <a href="#citation" class="btn btn-outline">
-                        <i class="fas fa-quote-right"></i>
-                        Cite This Paper
+                    <a href="#changes" class="btn btn-outline">
+                        <i class="fas fa-chart-line"></i>
+                        View Benefits
                     </a>
                 </div>
             </div>
@@ -1079,155 +1145,216 @@
     <!-- Abstract Section -->
     <section id="abstract" class="section abstract">
         <div class="container">
-            <h2 class="section-title">Abstract</h2>
+            <h2 class="section-title">Research Abstract</h2>
             <div class="abstract-content">
-                <p>This research presents a novel neural network architecture that significantly improves pattern recognition in complex, multi-modal datasets. Our approach combines convolutional and recurrent neural networks with attention mechanisms to achieve state-of-the-art performance across several benchmark datasets.</p>
-                <p>The proposed model demonstrates a <strong>15% improvement in accuracy</strong> compared to existing methods while reducing computational requirements by <strong>30%</strong>. We also introduce a new training methodology that enhances model generalization and reduces overfitting in data-scarce environments.</p>
-                <p>Our findings have significant implications for applications in medical imaging, autonomous systems, and natural language processing, where accurate pattern recognition is critical.</p>
+                <p>Following the AI boom in 2025, AI-powered tools and services have rapidly emerged within large-scale organizations. They empower enterprises to reshape their businesses, resources, and strategies based on AI's capabilities. Although AI-powered tools and agents are sophisticated enough to serve general business cases, they lack the specific talent to provide in-depth assistance without access to sufficient business data.</p>
+                <p>This research will dive into academic databases, peer-reviewed journals, and reputable industry sources to identify key business goals for SMEs and then determine the specific data readiness dimensions related to each business goal.</p>
                 
                 <div class="stats">
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-chart-line"></i>
+                            <i class="fas fa-chart-pie"></i>
                         </div>
-                        <div class="stat-number">15%</div>
-                        <div class="stat-label">Accuracy Improvement</div>
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">AI Programs Fail to Deliver</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-bolt"></i>
+                            <i class="fas fa-building"></i>
                         </div>
-                        <div class="stat-number">30%</div>
-                        <div class="stat-label">Faster Computation</div>
+                        <div class="stat-number">57%</div>
+                        <div class="stat-label">SMEs Lack AI Strategy</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-database"></i>
+                            <i class="fas fa-tools"></i>
                         </div>
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Benchmark Datasets</div>
+                        <div class="stat-number">52%</div>
+                        <div class="stat-label">Struggle with AI Integration</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-trophy"></i>
+                            <i class="fas fa-rocket"></i>
                         </div>
-                        <div class="stat-number">1st</div>
-                        <div class="stat-label">State-of-the-Art</div>
+                        <div class="stat-number">83%</div>
+                        <div class="stat-label">Believe AI Could Impact Growth</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Authors Section -->
-    <section id="authors" class="section authors">
+    <!-- Problem Section -->
+    <section id="problem" class="section problem">
         <div class="container">
-            <h2 class="section-title">Research Team</h2>
-            <div class="authors-grid">
-                <div class="author-card">
-                    <div class="author-img">
-                        <i class="fas fa-user-astronaut"></i>
-                    </div>
-                    <h3 class="author-name">Dr. Sarah Johnson</h3>
-                    <p class="author-role">Lead Researcher</p>
-                    <p>Professor of Computer Science at Stanford University with expertise in deep learning and computer vision.</p>
+            <h2 class="section-title">The Problem</h2>
+            <div class="problem-content">
+                <div class="problem-text">
+                    <p>AI cannot function without data. Data readiness is becoming a key research area for enabling enterprises to understand how well an organization is connected to the AI world.</p>
+                    <p>Existing literature primarily focuses on data readiness at a general management level, analyzing the impact of people, processes, and IT infrastructure. However, the connection between this form of readiness and specific business goals is relatively weak.</p>
+                    <p>In today's rapidly evolving environment, especially for SMEs, achieving business goals is crucial for survival and development. Therefore, it is beneficial for SMEs to understand their data readiness from a business goal-oriented perspective.</p>
+                    <p>Directly investing in the customization of AI tools does not seem practical for SMEs, considering the cost of talent, hardware, and software subscriptions. This approach does not fit the current state of most SMEs, which have limited resources.</p>
                 </div>
-                <div class="author-card">
-                    <div class="author-img">
-                        <i class="fas fa-user-ninja"></i>
+                <div class="problem-visual">
+                    <div class="visual-content">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>The AI Adoption Gap</h3>
+                        <p>High adoption rate but low transformation impact</p>
                     </div>
-                    <h3 class="author-name">Dr. Michael Chen</h3>
-                    <p class="author-role">Co-Researcher</p>
-                    <p>Research Scientist at MIT specializing in neural network architectures and optimization algorithms.</p>
-                </div>
-                <div class="author-card">
-                    <div class="author-img">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <h3 class="author-name">Dr. Emily Rodriguez</h3>
-                    <p class="author-role">Data Analyst</p>
-                    <p>Data scientist with focus on statistical analysis and experimental design for machine learning models.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Methodology Section -->
-    <section id="methodology" class="section methodology">
+    <!-- Benefits Section -->
+    <section id="benefits" class="section benefits">
         <div class="container">
             <h2 class="section-title">Methodology</h2>
-            <div class="methodology-content">
-                <div class="methodology-text">
-                    <p>Our research employed a hybrid neural network architecture that integrates convolutional layers for spatial feature extraction with long short-term memory (LSTM) units for temporal dependencies.</p>
-                    <p>We introduced a novel attention mechanism that dynamically weights the importance of different features during the classification process. This allows the model to focus on the most relevant aspects of the input data.</p>
-                    <p>The training process utilized a combination of supervised and self-supervised learning techniques, with data augmentation strategies specifically designed for multi-modal datasets.</p>
-                    <p>We evaluated our approach on five benchmark datasets across different domains, comparing performance against ten state-of-the-art models.</p>
-                    <a href="#" class="btn" style="margin-top: 30px;">
-                        <i class="fas fa-file-pdf"></i>
-                        Full Methodology
-                    </a>
+            <div class="benefits-content">
+                <div class="benefits-chart">
+                    <canvas id="benefitsChart"></canvas>
                 </div>
-                <div class="methodology-visual">
-                    <div class="visual-content">
-                        <i class="fas fa-project-diagram"></i>
-                        <h3>Architecture Diagram</h3>
-                        <p>Our proposed neural network architecture</p>
-                    </div>
+                <div class="benefits-text">
+                    <p>This research aims to strengthen the connection between business strategy and data strategy. As one of the intersections between business strategy and data strategy, business goals can provide common ground.</p>
+                    <p>It establishes a protocol among business owners, operations managers, IT specialists, customer experience managers, and product managers to plan and modify AI-specific data strategies that align with business strategies.</p>
+                    
+                    <table class="benefits-table">
+                        <thead>
+                            <tr>
+                                <th>Benefit ID</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>B1</td>
+                                <td>Direct reduction in wasted expenditure on inappropriate AI tools and misguided data projects.</td>
+                            </tr>
+                            <tr>
+                                <td>B2</td>
+                                <td>Drastically shortens the time to develop and approve a first-pass, AI-specific data strategy.</td>
+                            </tr>
+                            <tr>
+                                <td>B3</td>
+                                <td>Ensures every data initiative is explicitly justified by a top business goal.</td>
+                            </tr>
+                            <tr>
+                                <td>B4</td>
+                                <td>Directs limited personnel effort only towards improving critical data dimensions.</td>
+                            </tr>
+                            <tr>
+                                <td>B5</td>
+                                <td>Builds cross-functional buy-in and creates shared understanding of data.</td>
+                            </tr>
+                            <tr>
+                                <td>B6</td>
+                                <td>Transforms the AI journey from high-risk gamble to managed process.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Results Section -->
-    <section id="results" class="section results">
+    <!-- Changes Section -->
+    <section id="changes" class="section changes">
         <div class="container">
             <h2 class="section-title">Results</h2>
-            <div class="results-content">
-                <div class="results-chart">
-                    <div class="chart-content">
-                        <i class="fas fa-chart-network"></i>
-                        <h3>Performance Metrics</h3>
-                        <p>Comparative analysis showing our model's superiority</p>
+            <div class="changes-grid">
+                <div class="change-card">
+                    <div class="change-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="change-title">Shift Investment from Tools to Data Foundation</h3>
+                    <div class="change-state current">
+                        <h4>Current State</h4>
+                        <p>Resources are wasted evaluating and customizing expensive AI tools without the data to power them effectively.</p>
+                    </div>
+                    <div class="change-state future">
+                        <h4>Future State</h4>
+                        <p>SME investment is prioritised on preparing high-quality, business-specific data first, creating a valuable asset for any AI tool.</p>
                     </div>
                 </div>
-                <div class="results-text">
-                    <p>Our model achieved state-of-the-art results across all evaluated datasets, with an average improvement of 15% in classification accuracy compared to the previous best-performing models.</p>
-                    <p>Notably, the model demonstrated exceptional performance in handling noisy and incomplete data, maintaining 92% accuracy even with 40% missing input features.</p>
-                    
-                    <ul class="feature-list">
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span>15% average accuracy improvement across benchmarks</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span>92% accuracy with 40% missing data</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span>30% reduction in computational requirements</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span>Enhanced interpretability through attention mechanisms</span>
-                        </li>
-                    </ul>
-                    
-                    <a href="#" class="btn" style="margin-top: 30px;">
-                        <i class="fas fa-download"></i>
-                        Download Full Results
-                    </a>
+                
+                <div class="change-card">
+                    <div class="change-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3 class="change-title">Create a Direct Strategy-to-Execution Link</h3>
+                    <div class="change-state current">
+                        <h4>Current State</h4>
+                        <p>Business strategy and data strategy are disconnected, leading to misaligned projects and lack of buy-in.</p>
+                    </div>
+                    <div class="change-state future">
+                        <h4>Future State</h4>
+                        <p>Every data requirement is directly justified by a specific business goal, ensuring strategic alignment and clear value.</p>
+                    </div>
+                </div>
+                
+                <div class="change-card">
+                    <div class="change-icon">
+                        <i class="fas fa-stream"></i>
+                    </div>
+                    <h3 class="change-title">Simplify AI Data Strategy Development</h3>
+                    <div class="change-state current">
+                        <h4>Current State</h4>
+                        <p>Data readiness is seen as a complex, technical discipline requiring expensive experts.</p>
+                    </div>
+                    <div class="change-state future">
+                        <h4>Future State</h4>
+                        <p>SME owners and operational managers are empowered with a simplified, goal-oriented template.</p>
+                    </div>
+                </div>
+                
+                <div class="change-card">
+                    <div class="change-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="change-title">Break Down Functional Silos</h3>
+                    <div class="change-state current">
+                        <h4>Current State</h4>
+                        <p>Data is managed in a technical silo (IT), while business goals live in another (Leadership).</p>
+                    </div>
+                    <div class="change-state future">
+                        <h4>Future State</h4>
+                        <p>A cross-functional protocol establishes a common language, ensuring collaboration between business owners, operations, IT, and customer-facing roles.</p>
+                    </div>
+                </div>
+                
+                <div class="change-card">
+                    <div class="change-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 class="change-title">De-risk and Accelerate AI Adoption</h3>
+                    <div class="change-state current">
+                        <h4>Current State</h4>
+                        <p>The AI journey is perceived as high-risk and complex, leading to paralysis or expensive false starts.</p>
+                    </div>
+                    <div class="change-state future">
+                        <h4>Future State</h4>
+                        <p>SMEs have a clear, proven, and incremental pathway to prepare for AI, significantly reducing project failure risk.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Citation Section -->
-    <section id="citation" class="section">
+    <!-- Author Section -->
+    <section id="author" class="section author">
         <div class="container">
-            <h2 class="section-title">Citation</h2>
+            <h2 class="section-title">Research Author</h2>
+            <div class="author-content">
+                <div class="author-img">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3 class="author-name">Kankan Song</h3>
+                <p class="author-id">Student ID: 1426169</p>
+                <p>This research paper is submitted as part of ENGGEN 736 Assignment 1A, focusing on AI data readiness for SMEs from a business goal-oriented perspective.</p>
+            </div>
+            
             <div class="citation-box">
-                <p class="citation">Johnson, S., Chen, M., & Rodriguez, E. (2023). Advanced Neural Networks for Complex Pattern Recognition. Journal of Artificial Intelligence Research, 78(2), 345-367. DOI: 10.1613/jair.1.12345</p>
+                <p class="citation">Song, K. (2025). ENGGEN 736 Assignment 1A: Business Goal-Oriented Data Readiness for SMEs. University of Auckland.</p>
                 <button class="btn cite-btn">
                     <i class="fas fa-copy"></i>
                     Copy Citation
@@ -1241,8 +1368,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>NeuralCognition Research</h3>
-                    <p>Advancing the frontier of artificial intelligence through innovative research and collaboration.</p>
+                    <h3>AI Readiness Research</h3>
+                    <p>Advancing SME capabilities for AI adoption through strategic data readiness assessment.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -1251,26 +1378,25 @@
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Quick Links</h3>
+                    <h3>Research Sections</h3>
                     <ul class="footer-links">
                         <li><a href="#abstract"><i class="fas fa-arrow-right"></i> Abstract</a></li>
-                        <li><a href="#authors"><i class="fas fa-arrow-right"></i> Research Team</a></li>
-                        <li><a href="#methodology"><i class="fas fa-arrow-right"></i> Methodology</a></li>
-                        <li><a href="#results"><i class="fas fa-arrow-right"></i> Results</a></li>
-                        <li><a href="#citation"><i class="fas fa-arrow-right"></i> Citation</a></li>
+                        <li><a href="#problem"><i class="fas fa-arrow-right"></i> Problem Statement</a></li>
+                        <li><a href="#benefits"><i class="fas fa-arrow-right"></i> Methodology</a></li>
+                        <li><a href="#changes"><i class="fas fa-arrow-right"></i> Results</a></li>
+                        <li><a href="#author"><i class="fas fa-arrow-right"></i> Author</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contact</h3>
                     <ul class="footer-links">
-                        <li><a href="mailto:research@neuralcognition.edu"><i class="fas fa-envelope"></i> research@neuralcognition.edu</a></li>
-                        <li><a href="tel:+15551234567"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Stanford, CA 94305</a></li>
+                        <li><a href="mailto:kankan.song@auckland.ac.nz"><i class="fas fa-envelope"></i> kson023@aucklanduni.ac.nz</a></li>
+                        <li><a href="#"><i class="fas fa-university"></i> University of Auckland</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 NeuralCognition Research. All rights reserved.</p>
+                <p>&copy; 2025 University of Auckland Research Project. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1318,13 +1444,13 @@
         // Animate hero text
         gsap.to("#hero-title", {
             duration: 2,
-            text: "Advanced Neural Networks for Complex Pattern Recognition",
+            text: "AI Data Readiness for SMEs",
             ease: "none"
         });
 
         gsap.to("#hero-subtitle", {
             duration: 3,
-            text: "A groundbreaking study on the application of deep learning architectures in multi-modal data analysis with significant improvements in accuracy and efficiency.",
+            text: "A business goal-oriented approach to preparing small and medium enterprises for AI adoption through strategic data readiness assessment.",
             ease: "none",
             delay: 1
         });
@@ -1406,6 +1532,83 @@
         }
         
         createParticleNetwork();
+
+        // Benefits Chart
+        const ctx = document.getElementById('benefitsChart').getContext('2d');
+        const benefitsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['B1', 'B2', 'B3', 'B4', 'B5', 'B6'],
+                datasets: [{
+                    label: 'Benefit Impact Score',
+                    data: [95, 85, 90, 80, 75, 90],
+                    backgroundColor: [
+                        'rgba(139, 92, 246, 0.7)',
+                        'rgba(6, 214, 160, 0.7)',
+                        'rgba(245, 158, 11, 0.7)',
+                        'rgba(139, 92, 246, 0.7)',
+                        'rgba(6, 214, 160, 0.7)',
+                        'rgba(245, 158, 11, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgb(139, 92, 246)',
+                        'rgb(6, 214, 160)',
+                        'rgb(245, 158, 11)',
+                        'rgb(139, 92, 246)',
+                        'rgb(6, 214, 160)',
+                        'rgb(245, 158, 11)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)',
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const benefits = [
+                                    'Cost Reduction',
+                                    'Time Savings',
+                                    'Strategic Alignment',
+                                    'Efficiency',
+                                    'Collaboration',
+                                    'Risk Reduction'
+                                ];
+                                return benefits[context.dataIndex] + ': ' + context.parsed.y + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
